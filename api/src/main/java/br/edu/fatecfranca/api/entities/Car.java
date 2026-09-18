@@ -44,11 +44,16 @@ public class Car {
     @Column(name = "selling_price", precision = 12, scale = 2)
     private BigDecimal sellingPrice;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+    //@Column(name = "customer_id")
+    //private Long customerId;
+  
+  @ManyToOne
+  @JoinColumn(name = "customer_id")
+  private Customer customer;
+
 
     public Car() {
+
     }
 
     public Long getId() {
@@ -123,11 +128,20 @@ public class Car {
         this.sellingPrice = sellingPrice;
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
+    //public Long getCustomerId() {
+       // return customerId;
+    //}
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
+    //public void setCustomerId(Long customerId) {
+        //this.customerId = customerId;
+    //}
+     // customerId agora é obtido a partir do relacionamento
+  public Long getCustomerId() {
+    return customer != null ? customer.getId() : null;
+  }
+
+  public void setCustomer(Customer customer) {
+    this.customer = customer;
+  }
+
 }
